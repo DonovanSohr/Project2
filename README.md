@@ -8,6 +8,10 @@
     - Each drink will have a drop down menu for the full recipe and methods for making the cocktail
     - App will also have a surprise me feature that randomly generates a drink
 
+## Purpose
+
+    - Intended for people who may not know a lot about cocktails but want to try something new, and if they know what they like then they can search for a new one based on that
+
 ## Specifications
 
     - Home page will be a set of questions with multiple choice answers e.g. 'What alcohol would you prefer?' 'Would you like a garnish?'
