@@ -16,6 +16,10 @@ import React from 'react';
         className= 'main'
         onClick={() => props.setView('DrinkReturn')}>Find Drinks
       </button>
+      <button
+        className= 'idk'
+        onClick={() => props.setView('SearchBar')}>Know what you want?
+      </button>
     </div>
   );
 }
