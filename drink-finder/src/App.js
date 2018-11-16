@@ -4,6 +4,7 @@ import axios from 'axios';
 import NavBar from './components/NavBar';
 import SurpriseMe from './components/SurpriseMe';
 import Welcome from './components/Welcome';
+import DrinkReturn from './components/DrinkReturn';
 
 // BASE_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
 
@@ -33,31 +34,27 @@ class App extends Component {
 
  async handleSubmit(evt) {
    evt.preventDefault();
-   const  = {
-
-   }
-   await axios.post('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita', madePlanets)
-   this.getDrinks();
  }
 
  async getDrinks() {
-   const res = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita');
-   const drinks = res.data.drinks;
+   const req = axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita');
+   const drinks = await req;
     this.setState({
-      drinks: drinks
+      drinks: drinks.data.drinks
   });
 }
 
   async getRandomDrink() {
-    const res = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita');
-    this.setState({
-      randomPlanet: res.data.planet
-    });
-  }
+    const req = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita');
+    const drinks = await req;
+     this.setState({
+       randomDrink: drinks.data.drinks
+   });
+ }
 
   async componentDidMount() {
     this.getDrinks();
-    this.getRandomDrinks();
+    // this.getRandomDrinks();
   }
 
   setView (view) {
@@ -70,12 +67,12 @@ class App extends Component {
  const view = this.state.currentView;
  switch (view) {
   case 'DrinkReturn':
-     return <Index
+     return <DrinkReturn
               drinks={this.state.drinks}
               getDrinks={this.getDrinks}
             />
   case 'SurpriseMe':
-      return <Random
+      return <SurpriseMe
                 randomDrink={this.state.randomDrink}
                 getRandomDrinks={this.getRandomDrinks}
               />
