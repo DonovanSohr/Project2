@@ -10,7 +10,7 @@ import React from 'react';
       </button>
       <button
         className= 'secondButton'
-        onClick={() => props.setView('SurpriseMe')}>Surprise Me
+        onClick={() => props.setView('SurpriseMe')}>Bartender's Choice
       </button>
       <button
         className= 'mainSubmit'
