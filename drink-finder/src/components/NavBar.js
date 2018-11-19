@@ -14,7 +14,7 @@ import React from 'react';
       </button>
       <button
         className= 'mainSubmit'
-        onClick={() => props.setView('DrinkReturn')}>Submit
+        onClick={() => props.setView('DrinkReturn')}>Submit Search
       </button>
     </div>
   );

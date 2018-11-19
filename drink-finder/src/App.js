@@ -32,23 +32,21 @@ class App extends Component {
 
  async handleSubmit(evt) {
    evt.preventDefault();
-   await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${this.drinks}`);
-   this.getDrinks();
  }
 
  async getDrinks() {
-   const res = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${this.drinks}`);
+   const res = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita');
    const drinks = res.data.drinks;
-    this.setState ({
+    this.setState({
       drinks: drinks
-
   });
 }
 
   async getRandomDrink() {
     const res = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+    const drinks = res.data.drinks
     this.setState({
-      randomDrink: res.data.drinks
+      randomDrink: drinks
     });
   }
 
@@ -70,8 +68,6 @@ class App extends Component {
       return <SearchBar
                 handleSubmit = {this.handleSubmit}
                 handleChange = {this.handleChange}
-                getDrinks = {this.getDrinks}
-                drinks = {this.state.drinks}
               />
   case 'DrinkReturn':
      return <DrinkReturn
@@ -81,7 +77,7 @@ class App extends Component {
   case 'SurpriseMe':
       return <SurpriseMe
                 randomDrink={this.state.randomDrink}
-                getRandomDrinks={this.getRandomDrinks}
+                getRandomDrink={this.getRandomDrink}
               />
    case 'Welcome':
      return <Welcome />
@@ -93,8 +89,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-        </header>
+        <SearchBar
+                  handleSubmit = {this.handleSubmit}
+                  handleChange = {this.handleChange}
+                />
         <NavBar setView={this.setView}/>
         {this.getView()}
       </div>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import '../App.css';
 
 export default function Welcome() {
   return (
     <div className = 'welcomeBody'>
-      <h2>It's that time</h2>
-      <p>Want to try something new? Let us know what you like and we'll do our best to find a drink you'll love.</p>
+      <header>Virtual Bartender</header>
+      <h3>Want to know how to craft the perfect cocktail? Let us help!</h3>
     </div>
   )
 }
