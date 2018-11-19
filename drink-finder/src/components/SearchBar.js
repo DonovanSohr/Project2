@@ -1,18 +1,16 @@
 import React from 'react';
 
-class SearchBar extends Component {
-  render() {
+export default function SearchBar (props) {
   return (
     <form onSubmit = {props.handleSubmit}>
     <input
-      type= 'text'
-      name= 'SearchDrink'
-      placeholder= 'Alcohol Prference'
-      onChange= {props.handleChange}
-      value= {this.props.searchDrink}
+      type='text'
+      name='searchDrink'
+      placeholder='Whatcha lookin for'
+      onChange={props.handleChange}
+      value={props.searchDrink}
       >
-    <button type= 'submit' value= 'submit'>Submit</button>
-    </form>
+      </input>
+  </form>
   )
-}
 }

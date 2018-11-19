@@ -13,12 +13,8 @@ import React from 'react';
         onClick={() => props.setView('SurpriseMe')}>Surprise Me
       </button>
       <button
-        className= 'main'
-        onClick={() => props.setView('DrinkReturn')}>Find Drinks
-      </button>
-      <button
-        className= 'idk'
-        onClick={() => props.setView('SearchBar')}>Know what you want?
+        className= 'mainSubmit'
+        onClick={() => props.setView('DrinkReturn')}>Submit
       </button>
     </div>
   );

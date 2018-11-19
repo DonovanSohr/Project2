@@ -15,33 +15,13 @@ class App extends Component {
     this.state = {
       randomDrink: '',
       drinks: [],
-      alcohol: '',
-      garnish: '',
-      glass: '',
-      drinkName: '',
       currentView: '',
       searchDrink: '',
-      drinkSubmit: false,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setView = this.setView.bind(this);
   }
-
-  async getDrinks() {
-    const req = axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita');
-    const drinks = await req;
-     this.setState({
-       drinks: drinks.data.drinks
-   });
- }
-
- async getRandomDrink() {
-   const res = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
-    this.setState ({
-      randomDrink: res.data.drinks
-  });
-}
 
   handleChange(evt) {
     const { drink, value } = evt.target;
@@ -52,26 +32,25 @@ class App extends Component {
 
  async handleSubmit(evt) {
    evt.preventDefault();
-   this.setState ({
-     searchDrink: this.state.searchDrink
-     drinkSubmit: true
-   })
-   this.searchedDrink();
+   await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${this.drinks}`);
+   this.getDrinks();
  }
 
- handleSearch(evt) {
-   this.setState ({
-     searchDrink: evt.target.value
-   });
- }
+ async getDrinks() {
+   const res = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${this.drinks}`);
+   const drinks = res.data.drinks;
+    this.setState ({
+      drinks: drinks
 
-async searchedDrink() {
-  const req = axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${this.state.searchDrink}`);
-  const searchDrink = req.data;
-   this.setState({
-     drinkName: searchDrink.data.drinks,
- });
+  });
 }
+
+  async getRandomDrink() {
+    const res = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+    this.setState({
+      randomDrink: res.data.drinks
+    });
+  }
 
   async componentDidMount() {
     this.getDrinks();
@@ -88,11 +67,12 @@ async searchedDrink() {
  const view = this.state.currentView;
  switch (view) {
   case 'SearchBar':
-    return <SearchBar
-              handleSubmit = {this.handleSubmit}
-              searchDrink = {this.state.searchDrink}
-              onChange = {this.handleDrink}
-            />
+      return <SearchBar
+                handleSubmit = {this.handleSubmit}
+                handleChange = {this.handleChange}
+                getDrinks = {this.getDrinks}
+                drinks = {this.state.drinks}
+              />
   case 'DrinkReturn':
      return <DrinkReturn
               drinks={this.state.drinks}
